@@ -10,7 +10,7 @@ public class Locator_Selenium_2 {
 
 	public static void main(String[] args) throws InterruptedException {
 		// TODO Auto-generated method stub
-		String nama = "rifki";
+		String nama = "Setyanto";
 		ChromeDriver driver = new ChromeDriver(); //Buka browser Chrome
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5)); //waktu tunggu secara global
 		driver.get("https://rahulshettyacademy.com/locatorspractice/"); //Kunjungi Link
@@ -21,7 +21,7 @@ public class Locator_Selenium_2 {
 		Assert.assertEquals(driver.findElement(By.tagName("p")).getText(), "You are successfully logged in.");
 		Assert.assertEquals(driver.findElement(By.cssSelector("div[class='login-container'] h2")).getText(), "Hello "+nama+",");
 		driver.findElement(By.xpath("//*[text()='Log Out']")).click();
-		driver.close();
+		driver.quit();
 	}
 
 }
