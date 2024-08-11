@@ -14,6 +14,7 @@ public class GreenKart_Demo {
 		driver.get("https://rahulshettyacademy.com/seleniumPractise/#/");
 		List<WebElement> products = driver.findElements(By.cssSelector("h4.product-name"));	
 		String[] namaItem = {"Cucumber","Tomato","Brocolli"};
+		int j = 0;
 		
 		for(int i = 0; i < products.size(); i++) {
 			
@@ -23,12 +24,23 @@ public class GreenKart_Demo {
 			 * Eliminasi pada teks yang didapatkan oleh selenium
 			 * Trim == spasi nya
 			 * SPlit == teks nya
+			 * 
+			 * Brocolli | 1 Kg
 			 */
+			String[] namaProduk = nama.split("-");
+			// Index[0] = Brocolli
+			// Index[1] = 1 Kg
+			String namaProdukFix = namaProduk[0].trim();
+			
 			List<String> listItem = Arrays.asList(namaItem);
 			
-			if(listItem.contains(nama)) {
+			if(listItem.contains(namaProdukFix)) {
 				// klik add To Cart
 				driver.findElements(By.xpath("//button[text()='ADD TO CART']")).get(i).click();
+				j++;
+			}
+			if(j==listItem.size()) {
+				break;
 			}
 		}
 	}
