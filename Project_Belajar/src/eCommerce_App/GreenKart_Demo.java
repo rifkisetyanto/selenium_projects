@@ -36,7 +36,8 @@ public class GreenKart_Demo {
 			
 			if(listItem.contains(namaProdukFix)) {
 				// klik add To Cart
-				driver.findElements(By.xpath("//button[text()='ADD TO CART']")).get(i).click();
+//				driver.findElements(By.xpath("//button[text()='ADD TO CART']")).get(i).click();
+				driver.findElements(By.xpath("//div[@class='product-action']/button")).get(i).click();
 				j++;
 			}
 			if(j==listItem.size()) {
