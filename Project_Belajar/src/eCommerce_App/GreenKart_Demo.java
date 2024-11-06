@@ -6,7 +6,6 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.Assert;
 
 public class GreenKart_Demo {
 
@@ -45,9 +44,9 @@ public class GreenKart_Demo {
 				break;
 			}
 		}
-		driver.findElement(By.xpath("//img[@alt='Cart']")).click();
-		driver.findElement(By.xpath("//button[text()='PROCEED TO CHECKOUT']")).click();
-		
+	driver.findElement(By.xpath("//img[@alt='Cart']")).click();
+	driver.findElement(By.xpath("//button[text()='PROCEED TO CHECKOUT']")).click();
+	
 	}
 
 }
