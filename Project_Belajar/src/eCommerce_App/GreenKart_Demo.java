@@ -1,5 +1,6 @@
 package eCommerce_App;
 
+import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
 
@@ -11,6 +12,8 @@ public class GreenKart_Demo {
 
 	public static void main(String[] args) {
 		ChromeDriver driver = new ChromeDriver();
+//		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 		driver.get("https://rahulshettyacademy.com/seleniumPractise/#/");
 		List<WebElement> products = driver.findElements(By.cssSelector("h4.product-name"));	
 		String[] namaItem = {"Cucumber","Tomato","Brocolli"};
@@ -46,6 +49,12 @@ public class GreenKart_Demo {
 		}
 	driver.findElement(By.xpath("//img[@alt='Cart']")).click();
 	driver.findElement(By.xpath("//button[text()='PROCEED TO CHECKOUT']")).click();
+	
+	driver.findElement(By.className("promoCode")).sendKeys("rahulshettyacademy");
+	driver.findElement(By.cssSelector(".promoBtn")).click();
+	
+	System.out.println(driver.findElement(By.xpath("//span[@class='promoInfo']")).getText());
+	driver.findElement(By.xpath("//button[text()='Place Order']")).click();
 	
 	}
 
