@@ -7,13 +7,17 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class GreenKart_Demo {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		ChromeDriver driver = new ChromeDriver();
-//		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+		
 		driver.get("https://rahulshettyacademy.com/seleniumPractise/#/");
 		List<WebElement> products = driver.findElements(By.cssSelector("h4.product-name"));	
 		String[] namaItem = {"Cucumber","Tomato","Brocolli"};
@@ -50,11 +54,23 @@ public class GreenKart_Demo {
 	driver.findElement(By.xpath("//img[@alt='Cart']")).click();
 	driver.findElement(By.xpath("//button[text()='PROCEED TO CHECKOUT']")).click();
 	
+	wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("promoCode")));
+	
 	driver.findElement(By.className("promoCode")).sendKeys("rahulshettyacademy");
 	driver.findElement(By.cssSelector(".promoBtn")).click();
 	
+	wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@class='promoInfo']")));
+	
 	System.out.println(driver.findElement(By.xpath("//span[@class='promoInfo']")).getText());
 	driver.findElement(By.xpath("//button[text()='Place Order']")).click();
+	
+	
+	WebElement selectElement = driver.findElement(By.tagName("select"));
+	Select select = new Select(selectElement);
+	select.selectByValue("Indonesia");
+	
+	driver.findElement(By.cssSelector(".chkAgree")).click();
+	driver.findElement(By.tagName("button")).click();
 	
 	}
 
