@@ -67,10 +67,7 @@ public class GreenKart_Demo {
 	
 	WebElement selectElement = driver.findElement(By.tagName("select"));
 	Select select = new Select(selectElement);
-	select.selectByValue("Indonesia");
 	
-	driver.findElement(By.cssSelector(".chkAgree")).click();
-	driver.findElement(By.tagName("button")).click();
 	
 	}
 
