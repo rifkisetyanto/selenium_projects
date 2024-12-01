@@ -67,6 +67,17 @@ public class GreenKart_Demo {
 	
 	WebElement selectElement = driver.findElement(By.tagName("select"));
 	Select select = new Select(selectElement);
+	select.selectByValue("Indonesia");
+	Thread.sleep(1500);
+	
+	select.selectByIndex(117); //Malaysia
+	Thread.sleep(1500);
+	
+	select.selectByVisibleText("Palestine");
+	Thread.sleep(1500);
+	
+	driver.findElement(By.cssSelector(".chkAgree")).click();
+	driver.findElement(By.tagName("button")).click();
 	
 	
 	}
