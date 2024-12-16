@@ -27,6 +27,9 @@ public class StandAloneTest {
 		//eksplisit wait.
 		List<WebElement> products = driver.findElements(By.cssSelector(".mb-3"));
 		
+		WebElement prod = products.stream().filter(product->product.findElement(By.tagName("b")).getText().equals("ADIDAS ORIGINAL")).findFirst().orElse(null);
+		prod.findElement(By.cssSelector(".w-10")).click();
+		
 	}
 
 }
