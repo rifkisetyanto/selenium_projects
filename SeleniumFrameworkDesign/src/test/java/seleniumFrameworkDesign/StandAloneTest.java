@@ -7,11 +7,15 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 public class StandAloneTest {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		String productName = "ADIDAS ORIGINAL";
 		
 		WebDriver driver = new ChromeDriver();
 		driver.manage().window().maximize();
@@ -25,10 +29,20 @@ public class StandAloneTest {
 		
 		//dashboard
 		//eksplisit wait.
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 		List<WebElement> products = driver.findElements(By.cssSelector(".mb-3"));
 		
-		WebElement prod = products.stream().filter(product->product.findElement(By.tagName("b")).getText().equals("ADIDAS ORIGINAL")).findFirst().orElse(null);
+		WebElement prod = products.stream().filter(product->product.findElement(By.tagName("b")).getText().equals(productName)).findFirst().orElse(null);
 		prod.findElement(By.cssSelector(".w-10")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("toast-container")));
+		
+		driver.findElement(By.xpath("//button[@routerlink='/dashboard/cart']")).click();
+		
+		List<WebElement> cartProducts = driver.findElements(By.cssSelector(".cartSection h3"));
+		boolean match = cartProducts.stream().anyMatch(matching->matching.getText().equals(productName));
+		Assert.assertTrue(match);
+		driver.findElement(By.cssSelector(".totalRow button")).click();
+		driver.findElement(By.cssSelector(".form-group input")).sendKeys("indonesia");
 		
 	}
 
