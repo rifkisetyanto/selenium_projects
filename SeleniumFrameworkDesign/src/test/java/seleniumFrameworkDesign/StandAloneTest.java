@@ -13,7 +13,7 @@ import org.testng.Assert;
 
 public class StandAloneTest {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		// TODO Auto-generated method stub
 		String productName = "ADIDAS ORIGINAL";
 		
@@ -35,6 +35,7 @@ public class StandAloneTest {
 		WebElement prod = products.stream().filter(product->product.findElement(By.tagName("b")).getText().equals(productName)).findFirst().orElse(null);
 		prod.findElement(By.cssSelector(".w-10")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("toast-container")));
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("toast-container")));
 		
 		driver.findElement(By.xpath("//button[@routerlink='/dashboard/cart']")).click();
 		
@@ -42,7 +43,15 @@ public class StandAloneTest {
 		boolean match = cartProducts.stream().anyMatch(matching->matching.getText().equals(productName));
 		Assert.assertTrue(match);
 		driver.findElement(By.cssSelector(".totalRow button")).click();
-		driver.findElement(By.cssSelector(".form-group input")).sendKeys("indonesia");
+		driver.findElement(By.cssSelector(".form-group input")).sendKeys("ind");
+		
+		List<WebElement> country = driver.findElements(By.cssSelector(".ta-item"));
+		country.stream()
+		.filter(s->s.findElement(By.cssSelector(".ta-item span"))
+				.getText()
+				.equals("Indonesia")).findFirst().orElse(null).click();
+		
+		Thread.sleep(3000);
 		
 	}
 
