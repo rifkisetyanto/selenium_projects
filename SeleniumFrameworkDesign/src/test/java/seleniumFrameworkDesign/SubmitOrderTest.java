@@ -11,7 +11,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-public class StandAloneTest {
+import pageObjectRepository.LandingPage;
+
+public class SubmitOrderTest {
 
 	public static void main(String[] args) throws InterruptedException {
 		// TODO Auto-generated method stub
@@ -23,6 +25,7 @@ public class StandAloneTest {
 		driver.get("https://rahulshettyacademy.com/client");
 		
 		//login
+		LandingPage landingPage = new LandingPage(driver);
 		driver.findElement(By.id("userEmail")).sendKeys("rifki@academy.com");
 		driver.findElement(By.id("userPassword")).sendKeys("Admin12345");
 		driver.findElement(By.id("login")).click();
