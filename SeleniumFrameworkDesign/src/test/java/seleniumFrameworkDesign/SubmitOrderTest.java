@@ -12,33 +12,27 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import pageObjectRepository.LandingPage;
+import pageObjectRepository.ProductCatalogue;
 
 public class SubmitOrderTest {
 
 	public static void main(String[] args) throws InterruptedException {
 		// TODO Auto-generated method stub
-		String productName = "ADIDAS ORIGINAL";
+		String productName = "BANARSI SAREE";
 		
 		WebDriver driver = new ChromeDriver();
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-		driver.get("https://rahulshettyacademy.com/client");
 		
 		//login
 		LandingPage landingPage = new LandingPage(driver);
-		driver.findElement(By.id("userEmail")).sendKeys("rifki@academy.com");
-		driver.findElement(By.id("userPassword")).sendKeys("Admin12345");
-		driver.findElement(By.id("login")).click();
+		landingPage.go_to_URL();
+		landingPage.loginApplication("rifki@academy.com", "Admin12345");
 		
 		//dashboard
 		//eksplisit wait.
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-		List<WebElement> products = driver.findElements(By.cssSelector(".mb-3"));
-		
-		WebElement prod = products.stream().filter(product->product.findElement(By.tagName("b")).getText().equals(productName)).findFirst().orElse(null);
-		prod.findElement(By.cssSelector(".w-10")).click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("toast-container")));
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("toast-container")));
+		ProductCatalogue productCatalogue = new ProductCatalogue(driver);
+		productCatalogue.addToCart(productName);
 		
 		driver.findElement(By.xpath("//button[@routerlink='/dashboard/cart']")).click();
 		

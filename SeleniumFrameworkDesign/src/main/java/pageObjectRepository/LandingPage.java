@@ -19,15 +19,24 @@ public class LandingPage {
 	//WebElement login = driver.findElement(By.id("login"));
 	
 	//PageFactory
+
 	
 	@FindBy(id="userEmail")
-	WebElement username;
+	WebElement userEmail;
 	
 	@FindBy(id="userPassword")
-	WebElement password;
+	WebElement userPassword;
 	
 	@FindBy(id="login")
 	WebElement login;
 	
+	public void go_to_URL() {
+		driver.get("https://rahulshettyacademy.com/client");
+	}
 	
+	public void loginApplication(String email, String password) {
+		userEmail.sendKeys(email);
+		userPassword.sendKeys(password);
+		login.click();
+	}
 }
