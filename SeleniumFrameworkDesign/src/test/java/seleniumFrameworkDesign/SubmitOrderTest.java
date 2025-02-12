@@ -18,7 +18,7 @@ public class SubmitOrderTest {
 
 	public static void main(String[] args) throws InterruptedException {
 		// TODO Auto-generated method stub
-		String productName = "BANARSI SAREE";
+		String productName = "ZARA COAT 3";
 		
 		WebDriver driver = new ChromeDriver();
 		driver.manage().window().maximize();
@@ -33,6 +33,7 @@ public class SubmitOrderTest {
 		//eksplisit wait.
 		ProductCatalogue productCatalogue = new ProductCatalogue(driver);
 		productCatalogue.addToCart(productName);
+		
 		
 		driver.findElement(By.xpath("//button[@routerlink='/dashboard/cart']")).click();
 		

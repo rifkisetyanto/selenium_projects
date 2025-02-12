@@ -8,23 +8,18 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class AbstractComponent {
-
 	WebDriver driver;
-	public WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-	
+	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+
 	public AbstractComponent(WebDriver driver) {
 		this.driver=driver;
 	}
 
-	
-	
-	public void waitUntillElementVisible(By findBy) {
-//		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-		wait.until(ExpectedConditions.visibilityOfElementLocated(findBy));		
+	public void waitUntilElementAppear(By ele) {
+		wait.until(ExpectedConditions.visibilityOfElementLocated(ele));		
 	}
 	
-	public void waitUntillElementDisappear(By findBy) {
-//		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(findBy));		
+	public void waitUntilElementDissapear(By ele) {
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(ele));		
 	}
 }

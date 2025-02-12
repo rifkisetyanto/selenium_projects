@@ -29,8 +29,9 @@ public class ProductCatalogue extends AbstractComponent{
 	By namaProduct = By.tagName("b");
 	By addToCart = By.cssSelector(".w-10");
 	By toastMessage = By.id("toast-container");
+	
+	
 	public WebElement getProductByName(String productName) {
-		waitUntillElementVisible(addToCart);
 		WebElement prod = products.stream()
 				.filter(product->product.findElement(namaProduct)
 						.getText().equals(productName))
@@ -41,8 +42,8 @@ public class ProductCatalogue extends AbstractComponent{
 	public void addToCart(String productName) {
 		WebElement product = getProductByName(productName);
 		product.findElement(addToCart).click();
-		waitUntillElementVisible(toastMessage);
-		waitUntillElementDisappear(toastMessage);
+		waitUntilElementAppear(toastMessage);
+		waitUntilElementDissapear(toastMessage);
 	}
 	
 	
