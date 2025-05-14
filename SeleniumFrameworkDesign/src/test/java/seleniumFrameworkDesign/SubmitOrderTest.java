@@ -7,10 +7,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import pageObjectRepository.CartPage;
 import pageObjectRepository.LandingPage;
 import pageObjectRepository.ProductCatalogue;
 
@@ -33,14 +32,12 @@ public class SubmitOrderTest {
 		//eksplisit wait.
 		ProductCatalogue productCatalogue = new ProductCatalogue(driver);
 		productCatalogue.addToCart(productName);
+		productCatalogue.goToCartPage();
 		
+		CartPage cartPage = new CartPage(driver);
+		Assert.assertTrue(cartPage.productMatch(productName));
+		cartPage.goToCheckOutPage();
 		
-		driver.findElement(By.xpath("//button[@routerlink='/dashboard/cart']")).click();
-		
-		List<WebElement> cartProducts = driver.findElements(By.cssSelector(".cartSection h3"));
-		boolean match = cartProducts.stream().anyMatch(matching->matching.getText().equals(productName));
-		Assert.assertTrue(match);
-		driver.findElement(By.cssSelector(".totalRow button")).click();
 		driver.findElement(By.cssSelector(".form-group input")).sendKeys("ind");
 		
 		List<WebElement> country = driver.findElements(By.cssSelector(".ta-item"));
